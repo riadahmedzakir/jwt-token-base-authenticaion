@@ -1,0 +1,39 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxFill class="login-bg-img">
+    <div fxLayout="column" class="loginBox">
+        <mat-toolbar>
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+                <h2 class="primary-text-color">Login</h2>
+                <mat-icon class="cur-pointer primary-icon-color" matTooltip="Home" (click)="homepage()">home</mat-icon>
+            </div>
+        </mat-toolbar>
+        <form name="loginForm">
+            <mat-card fxLayout="column" class="md-padding">
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput type="email" [(ngModel)]="username" #email="ngModel" name="username"
+                        (keyup.enter)="login()" required email />
+                </mat-form-field>
+                <div *ngIf="email.touched">
+                    <mat-error *ngIf="email.errors?.required">Email is a required.</mat-error>
+                    <mat-error *ngIf="email.errors?.email">Please enter a valid email.</mat-error>
+                </div>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput required type="password" [(ngModel)]="password" #pass="ngModel" name="password"
+                        (keyup.enter)="login()" />
+                </mat-form-field>
+                <div *ngIf="pass.touched">
+                    <mat-error *ngIf="pass.errors?.required">Password is a required.</mat-error>
+                </div>
+                <mat-error *ngIf="isInactive">The user is not active.</mat-error>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" [disabled]="loginDisabled" (click)="login()">
+                        Login
+                    </button>
+                    <div flex="flex"></div>
+                    <!-- <button [disabled]="loginDisabled" md-no-ink>Forgot Password</button> -->
+                </div>
+            </mat-card>
+        </form>
+    </div>
+</div>

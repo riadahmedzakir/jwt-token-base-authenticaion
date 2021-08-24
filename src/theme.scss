@@ -1,0 +1,58 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$primary: (
+    Main: #05aa63,
+    Light: #07f48e,
+    Dark: #036038,
+    contrast: (
+        Main: #012f1b,
+        Light: #ffffff,
+        Dark: #000000,
+    ),
+);
+
+$accent: (
+    Main: #f7931e,
+    Light: #ffc453,
+    Dark: #be6500,
+    contrast: (
+        Main: #ffffff,
+        Light: #ffffff,
+        Dark: #ffffff,
+    ),
+);
+
+// $warn: $mat-red;
+
+$warn: (
+    Main: #b54107,
+    Light: #f2c3ac,
+    Dark: #3b1807,
+    contrast: (
+        Main: #ffffff,
+        Light: #ffffff,
+        Dark: #ffffff,
+    ),
+);
+
+$custom-theme-primary: mat-palette($primary, Main, Light, Dark);
+$custom-theme-accent: mat-palette($accent, Main, Light, Dark);
+$custom-theme-warn: mat-palette($warn, Main, Light, Dark);
+
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+// $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+@mixin custom-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+}
+
+.header {
+    font-weight: 400;
+    background: linear-gradient(to right, mat-color($primary, Light), mat-color($primary, Main)) !important;
+    color: #fff;
+}
+
+@include angular-material-theme($custom-theme);
